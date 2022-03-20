@@ -14,8 +14,7 @@ class TodoListViewController: UITableViewController {
     
     var itemArray = [Item]()
     
-    
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
+//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -38,7 +37,7 @@ class TodoListViewController: UITableViewController {
 //        newItem3.title = "To Do 3"
 //        itemArray.append(newItem3)
         
-//        loadItems()
+        loadItems()
     }
     
     // MARK: - UITableViewDataSource
@@ -99,7 +98,6 @@ class TodoListViewController: UITableViewController {
     }
     
     func saveItems() {
-        
         do {
             try context.save()
         } catch {
@@ -107,15 +105,14 @@ class TodoListViewController: UITableViewController {
         }
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            do {
-//                itemArray = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print("Error decoding item array \(error)")
-//            }
-//        }
-//    }
+    func loadItems() {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+    }
 }
 
