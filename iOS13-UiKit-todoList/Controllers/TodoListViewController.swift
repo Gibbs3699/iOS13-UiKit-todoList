@@ -37,6 +37,7 @@ class TodoListViewController: UITableViewController {
         newItem3.title = "To Do 3"
         itemArray.append(newItem3)
         
+        loadItems()
     }
     
     // MARK: - UITableViewDataSource
@@ -104,6 +105,17 @@ class TodoListViewController: UITableViewController {
             try data.write(to: dataFilePath!)
         } catch {
             print("Error coding item array \(error)")
+        }
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            do {
+                itemArray = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding item array \(error)")
+            }
         }
     }
 }
