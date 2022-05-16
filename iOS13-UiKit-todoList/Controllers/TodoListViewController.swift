@@ -29,15 +29,9 @@ class TodoListViewController: UITableViewController {
 //        newItem.title = "To Do 1"
 //        itemArray.append(newItem)
 //
-//        let newItem2 = Item()
-//        newItem2.title = "To Do 2"
-//        itemArray.append(newItem2)
-//
-//        let newItem3 = Item()
-//        newItem3.title = "To Do 3"
-//        itemArray.append(newItem3)
         
         loadItems()
+        
     }
     
     // MARK: - UITableViewDataSource
@@ -109,14 +103,32 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func loadItems() {
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
         
         do {
             itemArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
+        
+        tableView.reloadData()
+    }
+}
+
+//MARK: -  Search Bar Methods
+
+extension TodoListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "title CONTAINS %@", searchBar.text!)
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        loadItems(with: request)
+        
+        tableView.reloadData()
     }
 }
 
