@@ -93,7 +93,7 @@ class TodoListViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func saveItems() {
+    private func saveItems() {
         do {
             try context.save()
         } catch {
@@ -103,7 +103,7 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    private func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
         
         do {
             itemArray = try context.fetch(request)
