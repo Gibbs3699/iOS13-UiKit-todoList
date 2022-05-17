@@ -11,7 +11,6 @@
         <!--To Do List-->
         <scene sceneID="yNV-SD-4WI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CG6-8Y-5y6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Hbe-ef-Xpz" customClass="TodoListViewController" customModule="iOS13_UiKit_todoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Fjw-EQ-Sot">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -48,13 +47,13 @@
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CG6-8Y-5y6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2354" y="135"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GWa-Qn-IHW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NdD-K1-zk1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BeS-a0-nFn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TVg-vp-dK4">
@@ -66,13 +65,13 @@
                         <segue destination="5Gd-rB-Lt1" kind="relationship" relationship="rootViewController" id="6JM-M6-Os3"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NdD-K1-zk1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="869.56521739130437" y="134.59821428571428"/>
         </scene>
         <!--Category-->
         <scene sceneID="Zlh-D3-5G9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hNt-vD-3sx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="5Gd-rB-Lt1" customClass="CategoryViewController" customModule="iOS13_UiKit_todoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="dhX-0V-HTW" userLabel="CategoryCell">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -109,9 +108,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Hbe-ef-Xpz" kind="show" id="exJ-ST-9lc"/>
+                        <segue destination="Hbe-ef-Xpz" kind="show" identifier="goToItem" id="exJ-ST-9lc"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hNt-vD-3sx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1613" y="135"/>
         </scene>

@@ -7,10 +7,10 @@
     <entity name="Item" representedClassName=".Item" syncable="YES" codeGenerationType="class">
         <attribute name="done" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="parentCategory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="items" inverseEntity="Category"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="items" inverseEntity="Category"/>
     </entity>
     <elements>
-        <element name="Item" positionX="94.8984375" positionY="402.7265625" width="128" height="88"/>
         <element name="Category" positionX="-218.171875" positionY="398.72265625" width="128" height="73"/>
+        <element name="Item" positionX="17.2578125" positionY="401.875" width="128" height="88"/>
     </elements>
 </model>

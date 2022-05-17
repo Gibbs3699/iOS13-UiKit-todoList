@@ -9,29 +9,20 @@ import UIKit
 import CoreData
 
 class TodoListViewController: UITableViewController {
-
-//    var itemArray = ["To Do 1", "To Do 2", "To Do 3", "To Do 4", "To Do 5", "To Do 6", "To Do 7", "To Do 8", "To Do 9", "To Do 10", "To Do 11", "To Do 12", "To Do 13", "To Do 14", "To Do 15", "To Do 16", "To Do 17", "To Do 18", "To Do 19", "To Do 20", "To Do 21", "To Do 22", "To Do 23", "To Do 24", "To Do 25", "To Do 26", "To Do 27", "To Do 28", "To Do 29", "To Do 30"]
     
     var itemArray = [Item]()
     
 //    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    var selectedCategory : Category? {
+        didSet{
+            loadItems()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        if let item = defaults.array(forKey: "ToDoListArray") as? [Item] {
-//            itemArray = item
-//        }
-//        tableView.dataSource = self
-        
-//        let newItem = Item()
-//        newItem.title = "To Do 1"
-//        itemArray.append(newItem)
-//
-        
-        loadItems()
-        
     }
     
     // MARK: - UITableViewDataSource
@@ -75,6 +66,7 @@ class TodoListViewController: UITableViewController {
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
             newItem.done = false
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
             
             self.tableView.reloadData()
@@ -103,7 +95,15 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    private func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    private func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil ) {
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        }else {
+            request.predicate = categoryPredicate
+        }
         
         do {
             itemArray = try context.fetch(request)
